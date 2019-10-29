@@ -39,26 +39,26 @@ namespace TrashCollectorExercise.Models
         public string state { get; set; }
 
         [Required]
-        [Display(Name = "State")]
+        [Display(Name = "ZIP code")]
         public int zip { get; set; }
 
         [Required]
         [Display(Name = "Pickup Day")]
         public DayOfWeek pickupDay { get; set; }
 
-        [Required]
+       // [Required]
         [Display(Name = "Balance Due")]
         public decimal balance { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "Start Vacation")]
         public DateTime startBreak { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "End Vacation")]
         public DateTime endBreak { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "One-Time Pickup")]
         public DateTime oneTimePickup { get; set; }
 
