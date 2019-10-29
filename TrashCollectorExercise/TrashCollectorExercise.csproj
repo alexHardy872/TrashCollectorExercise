@@ -193,6 +193,10 @@
     <Compile Include="Migrations\201910282056441_init4.Designer.cs">
       <DependentUpon>201910282056441_init4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910291744578_try2.cs" />
+    <Compile Include="Migrations\201910291744578_try2.Designer.cs">
+      <DependentUpon>201910291744578_try2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -262,13 +266,13 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Role\Create.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
-    <Content Include="Views\Customer\Create.cshtml" />
     <Content Include="Views\Shared\LayoutCustomer.cshtml" />
     <Content Include="Views\Shared\LayoutEmployee.cshtml" />
+    <Content Include="Views\Employee\Create.cshtml" />
+    <Content Include="Views\Customer\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Employee\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -295,6 +299,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910282056441_init4.resx">
       <DependentUpon>201910282056441_init4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910291744578_try2.resx">
+      <DependentUpon>201910291744578_try2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

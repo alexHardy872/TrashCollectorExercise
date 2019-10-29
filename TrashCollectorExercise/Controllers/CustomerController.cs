@@ -7,7 +7,7 @@ using TrashCollectorExercise.Models;
 
 namespace TrashCollectorExercise.Controllers
 {
-    [Authorize(Roles = "Customer")]
+   // [Authorize(Roles = "Customer")]
     public class CustomerController : Controller
     {
         ApplicationDbContext context;
@@ -33,7 +33,7 @@ namespace TrashCollectorExercise.Controllers
         {
             
             Customer customer = new Customer();
-            Address address = new Address();
+          
             return View(customer);
         }
 
@@ -43,8 +43,8 @@ namespace TrashCollectorExercise.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-
+                context.Customers.Add(customer);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch

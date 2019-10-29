@@ -22,9 +22,25 @@ namespace TrashCollectorExercise.Models
         public string lastName { get; set; }
 
 
-        [ForeignKey("Address")]
-        public int AddressId { get; set; }
-        public Address Address { get; set; }
+        //[ForeignKey("Address")]
+        //public int AddressId { get; set; }
+        //public Address Address { get; set; }
+
+        [Required]
+        [Display(Name = "Address Line 1")]
+        public string streetAdress { get; set; }
+
+        [Required]
+        [Display(Name = "City")]
+        public string city { get; set; }
+
+        [Required]
+        [Display(Name = "State")]
+        public string state { get; set; }
+
+        [Required]
+        [Display(Name = "State")]
+        public int zip { get; set; }
 
         [Required]
         [Display(Name = "Pickup Day")]

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TrashCollectorExercise.Models;
 
 namespace TrashCollectorExercise.Controllers
 {
 
-    [Authorize(Roles = "Employee")]
+    //[Authorize(Roles = "Employee")]
     public class EmployeeController : Controller
     {
         // GET: Employee
@@ -25,17 +26,20 @@ namespace TrashCollectorExercise.Controllers
         // GET: Employee/Create
         public ActionResult Create()
         {
-            return View();
+
+            Employee employee = new Employee();
+
+            return View(employee);
         }
 
-        // POST: Employee/Create
+        // POST: Customer/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Employee employee)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                //context.Customer.Add(customer);
+                //context.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
