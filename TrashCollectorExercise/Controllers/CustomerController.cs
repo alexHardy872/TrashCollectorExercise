@@ -18,16 +18,17 @@ namespace TrashCollectorExercise.Controllers
             context = new ApplicationDbContext();
         }
         // GET: Customer
-        public ActionResult Index(int id)
+        public ActionResult Index()
         {
-            Customer customer = context.Customers.Where(h => h.Id == id).FirstOrDefault();
-            return View(customer);
+            return View();   
         }
 
         // GET: Customer/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details()//int id)
         {
-            return View();
+            string userId = User.Identity.GetUserId();
+            var customer = context.Customers.Where(h => h.ApplicationId == userId).FirstOrDefault();
+            return View(customer);
         }
 
         // GET: Customer/Create
@@ -43,20 +44,18 @@ namespace TrashCollectorExercise.Controllers
         [HttpPost]
         public ActionResult Create(Customer customer)
         {
-            //try
-            //{
+            try
+            {
                 string userId = User.Identity.GetUserId();
                 customer.ApplicationId = userId;
-                customer.startBreak = null;
-
                 context.Customers.Add(customer);
                 context.SaveChanges();
-                return RedirectToAction("Index");
-            //}
-            //catch
-            //{
-            //    return View();
-            //}
+                return RedirectToAction("Details");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: Customer/Edit/5

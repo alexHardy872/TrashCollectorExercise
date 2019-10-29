@@ -265,7 +265,7 @@
     <Content Include="Views\Customer\Break.cshtml" />
     <Content Include="Views\Customer\Pickup.cshtml" />
     <Content Include="Views\Customer\Balance.cshtml" />
-    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
