@@ -17,9 +17,10 @@ namespace TrashCollectorExercise.Controllers
             context = new ApplicationDbContext();
         }
         // GET: Customer
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            return View();
+            Customer customer = context.Customers.Where(h => h.Id == id).FirstOrDefault();
+            return View(customer);
         }
 
         // GET: Customer/Details/5
