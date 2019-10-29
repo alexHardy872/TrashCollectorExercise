@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TrashCollectorExercise.Models;
+using Microsoft.AspNet.Identity;
 
 namespace TrashCollectorExercise.Controllers
 {
@@ -42,16 +43,20 @@ namespace TrashCollectorExercise.Controllers
         [HttpPost]
         public ActionResult Create(Customer customer)
         {
-            try
-            {
+            //try
+            //{
+                string userId = User.Identity.GetUserId();
+                customer.ApplicationId = userId;
+                customer.startBreak = null;
+
                 context.Customers.Add(customer);
                 context.SaveChanges();
                 return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            //}
+            //catch
+            //{
+            //    return View();
+            //}
         }
 
         // GET: Customer/Edit/5

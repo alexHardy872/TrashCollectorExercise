@@ -52,15 +52,18 @@ namespace TrashCollectorExercise.Models
 
         //[Required]
         [Display(Name = "Start Vacation")]
-        public DateTime startBreak { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? startBreak { get; set; }
 
         //[Required]
         [Display(Name = "End Vacation")]
-        public DateTime endBreak { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? endBreak { get; set; }
 
         //[Required]
         [Display(Name = "One-Time Pickup")]
-        public DateTime oneTimePickup { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? oneTimePickup { get; set; }
 
 
 

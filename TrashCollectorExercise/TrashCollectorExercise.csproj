@@ -181,6 +181,14 @@
     <Compile Include="Migrations\201910291858105_initial.Designer.cs">
       <DependentUpon>201910291858105_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910292053167_changes.cs" />
+    <Compile Include="Migrations\201910292053167_changes.Designer.cs">
+      <DependentUpon>201910292053167_changes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910292104383_nullible.cs" />
+    <Compile Include="Migrations\201910292104383_nullible.Designer.cs">
+      <DependentUpon>201910292104383_nullible.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -278,6 +286,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910291858105_initial.resx">
       <DependentUpon>201910291858105_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910292053167_changes.resx">
+      <DependentUpon>201910292053167_changes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910292104383_nullible.resx">
+      <DependentUpon>201910292104383_nullible.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

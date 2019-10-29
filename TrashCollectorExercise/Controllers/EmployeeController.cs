@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TrashCollectorExercise.Models;
+using Microsoft.AspNet.Identity;
 
 namespace TrashCollectorExercise.Controllers
 {
@@ -11,6 +12,13 @@ namespace TrashCollectorExercise.Controllers
     //[Authorize(Roles = "Employee")]
     public class EmployeeController : Controller
     {
+        ApplicationDbContext context;
+
+        public EmployeeController()
+        {
+            context = new ApplicationDbContext();
+        }
+
         // GET: Employee
         public ActionResult Index()
         {
@@ -38,8 +46,10 @@ namespace TrashCollectorExercise.Controllers
         {
             try
             {
-                //context.Customer.Add(customer);
-                //context.SaveChanges();
+                string userId = User.Identity.GetUserId();
+                employee.ApplicationId = userId;
+                context.Employees.Add(employee);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
