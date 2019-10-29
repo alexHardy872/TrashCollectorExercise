@@ -13,7 +13,7 @@ namespace TrashCollectorExercise.Models
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "Adress Line 1")]
+        [Display(Name = "Address Line 1")]
         public string streetAdress { get; set; }
 
         [Required]
