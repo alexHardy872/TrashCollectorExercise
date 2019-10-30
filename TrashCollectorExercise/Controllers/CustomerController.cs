@@ -88,13 +88,18 @@ namespace TrashCollectorExercise.Controllers
                 customerInDb.ApplicationId = userId;
 
                 context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
             catch
             {
                 return View();
             }
         }
+
+
+
+       
+
 
         // GET: Customer/Delete/5
         public ActionResult Delete(int id)
