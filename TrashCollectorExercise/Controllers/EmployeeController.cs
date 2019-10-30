@@ -31,6 +31,7 @@ namespace TrashCollectorExercise.Controllers
             return View();
         }
 
+
         // GET: Employee/Create
         public ActionResult Create()
         {
@@ -50,13 +51,25 @@ namespace TrashCollectorExercise.Controllers
                 employee.ApplicationId = userId;
                 context.Employees.Add(employee);
                 context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Pickups");
             }
             catch
             {
                 return View();
             }
         }
+
+        public ActionResult Pickups()
+        {
+            string userId = User.Identity.GetUserId();
+            var employee = context.Employees.Where(e => e.ApplicationId == userId).Single();
+            var employeeZip = employee.zipCode;
+            var customersInZip = context.Customers.Where(c => c.zip == employeeZip).ToList();
+            return View(customersInZip);
+        }
+
+        // POST: Employee/Edit/5
+     
 
         // GET: Employee/Edit/5
         public ActionResult Edit(int id)
