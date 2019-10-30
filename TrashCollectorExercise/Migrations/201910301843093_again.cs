@@ -3,7 +3,7 @@ namespace TrashCollectorExercise.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class restart : DbMigration
+    public partial class again : DbMigration
     {
         public override void Up()
         {
@@ -14,7 +14,7 @@ namespace TrashCollectorExercise.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         firstName = c.String(nullable: false),
                         lastName = c.String(nullable: false),
-                        streetAdress = c.String(nullable: false),
+                        streetAddress = c.String(nullable: false),
                         city = c.String(nullable: false),
                         state = c.Int(nullable: false),
                         zip = c.Int(nullable: false),

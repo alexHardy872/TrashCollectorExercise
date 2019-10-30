@@ -59,19 +59,35 @@ namespace TrashCollectorExercise.Controllers
         }
 
         // GET: Customer/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit() 
         {
-            return View();
+            string userId = User.Identity.GetUserId();
+            Customer customerInDb = context.Customers.Single(m => m.ApplicationId == userId);
+            return View(customerInDb);
         }
 
         // POST: Customer/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Customer customer)
         {
             try
             {
-                // TODO: Add update logic here
+                string userId = User.Identity.GetUserId();
+                var customerInDb = context.Customers.Single(m => m.Id == customer.Id);
+                customerInDb.firstName = customer.firstName;
+                customerInDb.lastName = customer.lastName;
+                customerInDb.streetAddress = customer.streetAddress;
+                customerInDb.city = customer.city;
+                customerInDb.state = customer.state;
+                customerInDb.zip = customer.zip;
+                customerInDb.pickupDay = customer.pickupDay;
+                customerInDb.balance = customer.balance;
+                customerInDb.startBreak = customer.startBreak;
+                customerInDb.endBreak = customer.endBreak;
+                customerInDb.oneTimePickup = customer.oneTimePickup;
+                customerInDb.ApplicationId = userId;
 
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch

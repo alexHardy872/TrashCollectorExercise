@@ -28,7 +28,7 @@ namespace TrashCollectorExercise.Models
 
         [Required]
         [Display(Name = "Address Line 1")]
-        public string streetAdress { get; set; }
+        public string streetAddress { get; set; }
 
         [Required]
         [Display(Name = "City")]
@@ -55,16 +55,19 @@ namespace TrashCollectorExercise.Models
         public decimal balance { get; set; }
 
         //[Required]
+        [DataType(DataType.Date)]
         [Display(Name = "Start Vacation")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? startBreak { get; set; }
 
         //[Required]
+        [DataType(DataType.Date)]
         [Display(Name = "End Vacation")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? endBreak { get; set; }
 
         //[Required]
+        [DataType(DataType.Date)]
         [Display(Name = "One-Time Pickup")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? oneTimePickup { get; set; }
