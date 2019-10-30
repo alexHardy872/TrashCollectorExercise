@@ -36,7 +36,9 @@ namespace TrashCollectorExercise.Models
 
         [Required]
         [Display(Name = "State")]
-        public string state { get; set; }
+        public State state { get; set; }
+
+
 
         [Required]
         [Display(Name = "ZIP code")]
@@ -46,7 +48,9 @@ namespace TrashCollectorExercise.Models
         [Display(Name = "Pickup Day")]
         public DayOfWeek pickupDay { get; set; }
 
-       // [Required]
+
+
+        // [Required]
         [Display(Name = "Balance Due")]
         public decimal balance { get; set; }
 

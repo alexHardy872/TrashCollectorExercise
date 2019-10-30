@@ -1,9 +1,12 @@
 ﻿@model TrashCollectorExercise.Models.Customer
+    
 
 <div>
     <h4>Customer</h4>
     <hr />
     <dl class="dl-horizontal">
+
+
         <dt>
             @Html.DisplayNameFor(model => model.firstName)
         </dt>
@@ -61,6 +64,13 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.pickupDay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pickupDay)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.startBreak)
         </dt>
 
@@ -84,13 +94,13 @@
             @Html.DisplayFor(model => model.oneTimePickup)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.ApplicationId)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.ApplicationId)
-        </dd>
+        </dd>*@
 
     </dl>
 </div>
