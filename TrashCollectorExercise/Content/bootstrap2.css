@@ -19,6 +19,7 @@ html {
 }
 body {
   margin: 0;
+ 
 }
 article,
 aside,
@@ -6658,4 +6659,7 @@ button.close {
   .navbar .dropdown-menu a {
     color: #fff;
   }
+}
+body {
+    background-color: lightgreen;
 }

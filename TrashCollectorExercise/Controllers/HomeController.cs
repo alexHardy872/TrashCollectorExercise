@@ -17,7 +17,7 @@ namespace TrashCollectorExercise.Controllers
             }
             else if (User.IsInRole("Employee"))
             {
-                return RedirectToAction("Home", "Employee");
+                return RedirectToAction("Index", "Employee");
             }
             else
             {

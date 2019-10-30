@@ -1,0 +1,116 @@
+﻿@model TrashCollectorExercise.Models.Customer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.firstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.firstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.streetAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.streetAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.city)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.city)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.zip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.zip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.balance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.balance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.startBreak)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.startBreak)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.endBreak)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.endBreak)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.oneTimePickup)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.oneTimePickup)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.ApplicationId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationId)
+        </dd>*@
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id })*@ |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<div id="map"></div>
+<script>
+    var map;
+    function initMap() {
+        // Constructs new map - only center and zoom required
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 40.7413549, lng: -73.9980244 },
+            zoom: 13
+        });
+    }
+</script>
+
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYcj9YRAKOTev8YEzil9aqLujwBXmD2d0&v=3&callback=initMap">
+
+</script>
+

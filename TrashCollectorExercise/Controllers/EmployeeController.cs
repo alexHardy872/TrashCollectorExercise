@@ -22,13 +22,16 @@ namespace TrashCollectorExercise.Controllers
         // GET: Employee
         public ActionResult Index()
         {
-            return View();
+
+            return RedirectToAction("Pickups");
         }
 
         // GET: Employee/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+
+            var customer = context.Customers.Where(c => c.Id == id).Single();
+            return View(customer);
         }
 
 
