@@ -64,6 +64,7 @@ namespace TrashCollectorExercise.Controllers
 
         public ActionResult Pickups()
         {
+            ResetPastPickups();
             string userId = User.Identity.GetUserId();
             var employee = context.Employees.Where(e => e.ApplicationId == userId).Single();
             var employeeZip = employee.zipCode;
@@ -91,6 +92,46 @@ namespace TrashCollectorExercise.Controllers
             context.SaveChanges();
             return RedirectToAction("Pickups");
 
+        }
+
+        public ActionResult ResetList()    // RESETS LIST FOR THE DAY BY MAKING CONFIRMED FALSE
+        {
+            string userId = User.Identity.GetUserId();
+            var employee = context.Employees.Where(e => e.ApplicationId == userId).Single();
+            var employeeZip = employee.zipCode;
+            var customersInZip = context.Customers.Where(c => c.zip == employeeZip).ToList();
+            foreach (Customer customer in customersInZip)
+            {
+                customer.confirmed = false;
+            }
+            context.SaveChanges();
+            return RedirectToAction("Pickups");
+        }
+
+        private void ResetPastPickups() // TAKES OLD PICKUPS AND REVERSES THE CONFIRMATION BOOL
+        {
+            DateTime thisDay = DateTime.Today;
+            DayOfWeek today = thisDay.DayOfWeek;
+            var customers = new List<Customer>();
+            if (today.Equals("Sunday"))
+            {
+                customers = context.Customers.Where(c => c.pickupDay > today || c.oneTimePickup < thisDay && c.pickupDay != today).ToList();
+            }
+            else
+            {
+                customers = context.Customers.Where(c => c.pickupDay < today || c.oneTimePickup < thisDay && c.pickupDay != today).ToList();
+                //customers = context.Customers.Where(c => c.pickupDay == today).ToList();
+            }
+
+
+
+
+            foreach (Customer customer in customers)
+            {
+                customer.confirmed = false;
+            }
+
+            context.SaveChanges();
         }
 
         // POST: Employee/Edit/5

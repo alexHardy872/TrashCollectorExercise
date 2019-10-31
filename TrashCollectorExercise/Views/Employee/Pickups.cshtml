@@ -41,53 +41,59 @@
             @Html.DisplayNameFor(model => model.oneTimePickup)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.ApplicationId)
-        </th>*@
+                @Html.DisplayNameFor(model => model.ApplicationId)
+            </th>*@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.ActionLink("Confirm Pickup", "UpdateList", new { id = item.Id })
- 
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.firstName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.lastName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.streetAddress)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.city)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.zip)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.balance)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.startBreak)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.endBreak)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.oneTimePickup)
-    </td>
-    @*<td>
-            @Html.DisplayFor(modelItem => item.ApplicationId)
-        </td>*@
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-    </td>
-</tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("Confirm Pickup", "UpdateList", new { id = item.Id })
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.firstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.streetAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.zip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.balance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.startBreak)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endBreak)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.oneTimePickup)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.ApplicationId)
+                </td>*@
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+
+
+    }
 
 </table>
+<div>
+    @Html.ActionLink("UNCONFIRM ALL", "ResetList", "Employee") |
+</div>
