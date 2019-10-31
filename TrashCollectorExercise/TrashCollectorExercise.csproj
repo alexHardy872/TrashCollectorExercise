@@ -265,6 +265,7 @@
     <Content Include="Views\Employee\Pickups.cshtml" />
     <Content Include="Views\Employee\Details.cshtml" />
     <Content Include="Views\Employee\Edit.cshtml" />
+    <Content Include="Views\Employee\Look.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
