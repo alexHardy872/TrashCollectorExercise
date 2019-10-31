@@ -15,8 +15,9 @@ namespace TrashCollectorExercise.Models
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "ZIP Code")]
-        public int zipCode { get; set; }
+        [DataType(DataType.PostalCode)]
+        [Display(Name = "ZIP code")]
+        public string zipCode { get; set; }
 
         [ForeignKey("ApplicationUser")]
         public string ApplicationId { get; set; }

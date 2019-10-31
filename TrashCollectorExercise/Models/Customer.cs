@@ -13,6 +13,9 @@ namespace TrashCollectorExercise.Models
         [Key]
         public int Id { get; set; }
 
+        
+      
+
         [Required]
         [Display(Name = "First Name")]
         public string firstName { get; set; }
@@ -41,8 +44,9 @@ namespace TrashCollectorExercise.Models
 
 
         [Required]
+        [DataType(DataType.PostalCode)]
         [Display(Name = "ZIP code")]
-        public int zip { get; set; }
+        public string zip { get; set; }
 
         [Required]
         [Display(Name = "Pickup Day")]
@@ -50,7 +54,7 @@ namespace TrashCollectorExercise.Models
 
 
 
-        // [Required]
+        [DataType(DataType.Currency)]
         [Display(Name = "Balance Due")]
         public decimal balance { get; set; }
 
@@ -81,7 +85,8 @@ namespace TrashCollectorExercise.Models
 
 
 
-
+        [Display(Name = "Pickup Confirmed")]
+        public bool confirmed { get; set; }
 
 
     }

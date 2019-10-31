@@ -68,6 +68,20 @@ namespace TrashCollectorExercise.Controllers
             var employee = context.Employees.Where(e => e.ApplicationId == userId).Single();
             var employeeZip = employee.zipCode;
             var customersInZip = context.Customers.Where(c => c.zip == employeeZip).ToList();
+
+           DateTime thisDay = DateTime.Today;
+            DayOfWeek today = thisDay.DayOfWeek;
+
+            var todaysCustomers = customersInZip.Where(c => c.pickupDay == today || c.oneTimePickup == thisDay).ToList();
+
+            // check where pickup day = todays
+
+            // one time pick ups
+
+            // not in vactions?
+
+            // then have react to bool confirmed and disappear AND charge customer
+
             return View(customersInZip);
         }
 
