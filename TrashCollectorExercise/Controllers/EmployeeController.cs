@@ -156,16 +156,18 @@ namespace TrashCollectorExercise.Controllers
 
         }
 
-        //public ActionResult Look(DayOfWeek day)
-        //{
-        //    string userId = User.Identity.GetUserId();
-        //    var employee = context.Employees.Where(e => e.ApplicationId == userId).Single();
-        //    var employeeZip = employee.zipCode;
-        //    var customersInZip = context.Customers.Where(c => c.zip == employeeZip).OrderBy(g => g.pickupDay).ToList();
-        //    var customersInZipFiltered = customersInZip.Where(c => c.pickupDay == day).ToList();
-        //    return View(customersInZipFiltered);
+        public ActionResult FilterByDay(DayOfWeek day)
+        {
+            string userId = User.Identity.GetUserId();
+            var employee = context.Employees.Where(e => e.ApplicationId == userId).Single();
+            var employeeZip = employee.zipCode;
+            var customersInZip = context.Customers.Where(c => c.zip == employeeZip).ToList();
+            var customersInZipFiltered = customersInZip.Where(c => c.pickupDay == day).ToList();
+            return View(customersInZipFiltered);
 
-        //}
+        }
+
+
 
         // GET: Employee/Edit/5
         public ActionResult Edit(int id)
