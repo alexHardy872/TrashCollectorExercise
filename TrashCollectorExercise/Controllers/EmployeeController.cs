@@ -84,6 +84,14 @@ namespace TrashCollectorExercise.Controllers
 
             return View(todayRemaining);
         }
+        public ActionResult UpdateList(int id)
+        {
+           var customer =  context.Customers.Where(c => c.Id == id).Single();
+            customer.confirmed = true;
+            context.SaveChanges();
+            return RedirectToAction("Pickups");
+
+        }
 
         // POST: Employee/Edit/5
      

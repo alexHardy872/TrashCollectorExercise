@@ -9,7 +9,10 @@
 
 <table class="table">
     <tr>
-  
+
+        <th>
+            @Html.DisplayNameFor(model => model.confirmed)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.firstName)
         </th>
@@ -45,7 +48,10 @@
 
 @foreach (var item in Model) {
 <tr>
+    <td>
+        @Html.ActionLink("Confirm Pickup", "UpdateList", new { id = item.Id })
  
+    </td>
     <td>
         @Html.DisplayFor(modelItem => item.firstName)
     </td>
