@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TrashCollectorExercise.Models;
 using Microsoft.AspNet.Identity;
+using TrashCollectorExercise.App_Start;
 
 namespace TrashCollectorExercise.Controllers
 {
@@ -76,7 +77,7 @@ namespace TrashCollectorExercise.Controllers
             var todaysCustomers = customersInZip.Where(c => c.pickupDay == today || c.oneTimePickup == thisDay).ToList();
 
             // check null start and/or end?
-            var todaysAvailableCustomers = todaysCustomers.Where(c => (thisDay < c.startBreak || c.startBreak == null) || thisDay > c.endBreak).ToList();
+            var todaysAvailableCustomers = todaysCustomers.Where(c => (thisDay < c.startBreak || c.startBreak == null) || (thisDay > c.endBreak || c.endBreak == null)).ToList();
 
             var todayRemaining = todaysAvailableCustomers.Where(c => c.confirmed == false).ToList();
 
@@ -89,6 +90,7 @@ namespace TrashCollectorExercise.Controllers
         {
            var customer =  context.Customers.Where(c => c.Id == id).Single();
             customer.confirmed = true;
+            customer.balance += Garbage.GetPricePerPickup();
             context.SaveChanges();
             return RedirectToAction("Pickups");
 
