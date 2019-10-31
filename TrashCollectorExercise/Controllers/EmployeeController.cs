@@ -65,13 +65,15 @@ namespace TrashCollectorExercise.Controllers
 
         public ActionResult Pickups()
         {
-            ResetPastPickups();
+            
             string userId = User.Identity.GetUserId();
             var employee = context.Employees.Where(e => e.ApplicationId == userId).Single();
             var employeeZip = employee.zipCode;
             var customersInZip = context.Customers.Where(c => c.zip == employeeZip).ToList();
 
-           DateTime thisDay = DateTime.Today;
+            ResetPastPickups(customersInZip);
+
+            DateTime thisDay = DateTime.Today;
             DayOfWeek today = thisDay.DayOfWeek;
 
             var todaysCustomers = customersInZip.Where(c => c.pickupDay == today || c.oneTimePickup == thisDay).ToList();
@@ -115,23 +117,20 @@ namespace TrashCollectorExercise.Controllers
             return RedirectToAction("Pickups");
         }
 
-        private void ResetPastPickups() // TAKES OLD PICKUPS AND REVERSES THE CONFIRMATION BOOL
+        private void ResetPastPickups(List<Customer> customers) // TAKES OLD PICKUPS AND REVERSES THE CONFIRMATION BOOL
         {
             DateTime thisDay = DateTime.Today;
             DayOfWeek today = thisDay.DayOfWeek;
-            var customers = new List<Customer>();
+            
             if (today.Equals("Sunday"))
             {
-                customers = context.Customers.Where(c => c.pickupDay > today || c.oneTimePickup < thisDay && c.pickupDay != today).ToList();
+                customers = context.Customers.Where(c => c.pickupDay > today || c.oneTimePickup != thisDay && c.pickupDay != today).ToList();
             }
             else
             {
-                customers = context.Customers.Where(c => c.pickupDay < today || c.oneTimePickup < thisDay && c.pickupDay != today).ToList();
+                customers = context.Customers.Where(c => c.pickupDay < today && c.oneTimePickup != thisDay ).ToList();
                 //customers = context.Customers.Where(c => c.pickupDay == today).ToList();
             }
-
-
-
 
             foreach (Customer customer in customers)
             {
