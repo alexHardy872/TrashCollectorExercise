@@ -74,15 +74,15 @@ namespace TrashCollectorExercise.Controllers
 
             var todaysCustomers = customersInZip.Where(c => c.pickupDay == today || c.oneTimePickup == thisDay).ToList();
 
-            // check where pickup day = todays
+            // check null start and/or end?
+            var todaysAvailableCustomers = todaysCustomers.Where(c => (thisDay < c.startBreak || c.startBreak == null) || thisDay > c.endBreak).ToList();
 
-            // one time pick ups
+            var todayRemaining = todaysAvailableCustomers.Where(c => c.confirmed == false).ToList();
 
-            // not in vactions?
-
+ 
             // then have react to bool confirmed and disappear AND charge customer
 
-            return View(customersInZip);
+            return View(todayRemaining);
         }
 
         // POST: Employee/Edit/5

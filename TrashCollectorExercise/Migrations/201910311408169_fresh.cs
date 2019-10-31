@@ -3,7 +3,7 @@ namespace TrashCollectorExercise.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class restart : DbMigration
+    public partial class fresh : DbMigration
     {
         public override void Up()
         {
@@ -12,7 +12,6 @@ namespace TrashCollectorExercise.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        confirmed = c.Boolean(nullable: false),
                         firstName = c.String(nullable: false),
                         lastName = c.String(nullable: false),
                         streetAddress = c.String(nullable: false),
@@ -25,6 +24,7 @@ namespace TrashCollectorExercise.Migrations
                         endBreak = c.DateTime(),
                         oneTimePickup = c.DateTime(),
                         ApplicationId = c.String(maxLength: 128),
+                        confirmed = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.ApplicationId)

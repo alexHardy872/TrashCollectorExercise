@@ -7,13 +7,13 @@ namespace TrashCollectorExercise.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class restart : IMigrationMetadata
+    public sealed partial class fresh : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(restart));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(fresh));
         
         string IMigrationMetadata.Id
         {
-            get { return "201910311243349_restart"; }
+            get { return "201910311408169_fresh"; }
         }
         
         string IMigrationMetadata.Source
