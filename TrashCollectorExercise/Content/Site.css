@@ -26,3 +26,14 @@ textarea {
 #map {
     height: 100%;
 }
+
+.dispName {
+    color: purple;
+    font-weight: bold;
+    font-style: italic;
+}
+
+#bill{
+    color: green;
+    font-size: 32pt;
+}

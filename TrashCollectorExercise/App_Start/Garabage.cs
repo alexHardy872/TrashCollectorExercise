@@ -9,7 +9,7 @@ namespace TrashCollectorExercise.App_Start
     {
         public static decimal GetPricePerPickup()
         {
-            return 3.35m;
+            return 9.75m;
         }
 
 

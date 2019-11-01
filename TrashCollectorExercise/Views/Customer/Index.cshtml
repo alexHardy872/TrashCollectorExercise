@@ -1,0 +1,87 @@
+﻿@model IEnumerable<TrashCollectorExercise.Models.Customer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@foreach(var item in Model)
+{
+    <h2>Welcome <span class="dispName">@Html.DisplayFor(modelItem => item.firstName) @Html.DisplayFor(modelItem => item.lastName)</span>!</h2>
+}
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.firstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.streetAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.city)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.zip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.balance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.startBreak)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.endBreak)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.oneTimePickup)
+        </th>
+      
+        <th>
+            @Html.DisplayNameFor(model => model.confirmed)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.streetAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.city)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.zip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.balance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.startBreak)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.endBreak)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.oneTimePickup)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.confirmed)
+        </td>
+      
+    </tr>
+}
+
+</table>

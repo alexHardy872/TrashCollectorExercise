@@ -17,10 +17,14 @@ namespace TrashCollectorExercise.Controllers
         {
             context = new ApplicationDbContext();
         }
-        // GET: Customer
+        // GET: Customer   HOMEPAGE, LIST OF CUSTOMER DETAILS IN LIST FORM
         public ActionResult Index()
         {
-            return View();   
+
+            string userId = User.Identity.GetUserId();
+            var customer = context.Customers.Where(h => h.ApplicationId == userId).ToList();
+            return View(customer);
+              
         }
 
         // GET: Customer/Details/5
@@ -28,6 +32,16 @@ namespace TrashCollectorExercise.Controllers
         {
             string userId = User.Identity.GetUserId();
             var customer = context.Customers.Where(h => h.ApplicationId == userId).FirstOrDefault();
+            return View(customer);
+        }
+
+        public ActionResult Balance()
+        {
+            string userId = User.Identity.GetUserId();
+            var customer = context.Customers.Where(h => h.ApplicationId == userId).FirstOrDefault();
+
+            
+
             return View(customer);
         }
 

@@ -21,38 +21,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.streetAdress)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.streetAdress)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.city)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.city)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.state)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.state)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.zip)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.zip)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.balance)
         </dt>
 
@@ -60,21 +28,9 @@
             @Html.DisplayFor(model => model.balance)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.startBreak)
-        </dt>
+   
 
-        <dd>
-            @Html.DisplayFor(model => model.startBreak)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.endBreak)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.endBreak)
-        </dd>
+     
 
         <dt>
             @Html.DisplayNameFor(model => model.oneTimePickup)
@@ -84,17 +40,54 @@
             @Html.DisplayFor(model => model.oneTimePickup)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ApplicationId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ApplicationId)
-        </dd>
+  
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div id="bill" style="color:green; font-size: 32pt; font-weight: bold;">
+    Display Bill Here
+</div>
+
+<script>
+@{ 
+
+    var price = TrashCollectorExercise.App_Start.Garbage.GetPricePerPickup();
+    DateTime thisDay = DateTime.Now;
+    var month = thisDay.Month;
+    var year = thisDay.Year;
+    var daysInMonth = DateTime.DaysInMonth(year, month); 
+    DateTime date = thisDay;
+    var firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
+    var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+    List<DateTime> billedDatesOfMonth = new List<DateTime>();
+    for (int i = 1; i < daysInMonth + 1; i++) // logic for suspension
+    {
+        DateTime newDay = new DateTime(year, month, i);
+        if (newDay.DayOfWeek == Model.pickupDay || newDay == Model.oneTimePickup)
+        {
+            if (Model.startBreak <= newDay && newDay <= Model.endBreak)
+            {
+
+            }
+            else
+            {
+                billedDatesOfMonth.Add(newDay);
+            }          
+        }
+    }
+    var predictedPickups = billedDatesOfMonth.Count;
+    decimal predictedBill = predictedPickups * price;
+    var FormatBill = string.Format("{0:C}", predictedBill );
+    
+
+    
+
+}
+    
+    var billSpace = document.getElementById("bill");
+    billSpace.innerHTML = "Your Projected Bill for the Month of "+@month+" (including extra pickups and exclusing absence) is $"+@FormatBill;
+    
+
+    
+
+</script>
