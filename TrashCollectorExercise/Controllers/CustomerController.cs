@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TrashCollectorExercise.Models;
 using Microsoft.AspNet.Identity;
+using TrashCollectorExercise.ViewModels;
 
 namespace TrashCollectorExercise.Controllers
 {
@@ -40,10 +41,47 @@ namespace TrashCollectorExercise.Controllers
             string userId = User.Identity.GetUserId();
             var customer = context.Customers.Where(h => h.ApplicationId == userId).FirstOrDefault();
 
-            
+            BalanceViewModel balanceView = new BalanceViewModel();
 
-            return View(customer);
+            balanceView.customer = customer;
+            balanceView.predictedBalance = PredictBillForMonth(customer);
+
+
+            return View(balanceView);
         }
+
+        private string PredictBillForMonth(Customer customer)
+        {
+            var price = App_Start.Garbage.GetPricePerPickup();
+            DateTime thisDay = DateTime.Now;
+            var month = thisDay.Month;
+            var year = thisDay.Year;
+            var daysInMonth = DateTime.DaysInMonth(year, month);
+            DateTime date = thisDay;
+            var firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
+            var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+            List<DateTime> billedDatesOfMonth = new List<DateTime>();
+            for (int i = 1; i < daysInMonth + 1; i++) // logic for suspension
+            {
+                DateTime newDay = new DateTime(year, month, i);
+                if (newDay.DayOfWeek == customer.pickupDay || newDay == customer.oneTimePickup)
+                {
+                    if (customer.startBreak <= newDay && newDay <= customer.endBreak)
+                    {
+
+                    }
+                    else
+                    {
+                        billedDatesOfMonth.Add(newDay);
+                    }
+                }
+            }
+            var predictedPickups = billedDatesOfMonth.Count;
+            decimal predictedBill = predictedPickups * price;
+            var FormatBill = string.Format("{0:C}", predictedBill);
+            return FormatBill;
+        }
+
 
         // GET: Customer/Create
         public ActionResult Create()
