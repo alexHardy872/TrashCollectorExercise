@@ -96,85 +96,81 @@
     @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id })*@ |
     @Html.ActionLink("Back to List", "Index")
 </p>
-@*<div id="map"></div>
-<script>
-    var map;
-    function initMap() {
-        // Constructor creates a new map - only center and zoom are required.
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: 40.7413549, lng: -73.9980244 },
-            zoom: 13
-        });
-    }
-</script>*@
+
 
 
 
 
 <div id="map"></div>
 
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
+
     
-    // call geocode
     @{
         string address = Model.streetAddress + " " + Model.city + " " + Model.state + " " + Model.zip;
 
         API api = new API();
+        string googleRequest = api.GoogleAPICall;
         string keyy = api.Key;
-        
 
     }
 
+    var test3 = [];
     geocode();
-    function geocode() {
-        var location = @address;
 
-
-        axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
-            params: {
-                address: location,
-                key: @keyy
-            }
-        })
-            .then(function (response) {
-                //log full response
-
-                console.log(response);
-
-                // formatted Address
-                var formattedAddress = response.data.results[0].formatted_address;
-                var latA = response.data.results[0].geometry.location.lat;
-                var lngA = response.data.results[0].geometry.location.lng;
-                initMap(latA, lngA);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+    function Master(data) {
+        //var here = geocode();
+        var test = data;
+        console.log(test);
+        test3 = data;
+        console.log(test3);
+        initMap(data);
     }
-        function initMap(latA, lngA) {
+
+    var final = "test";
+    //geocode();
+    function geocode() {
+        var latLng = [];
+        let params = {
+            "address": @address,
+            "key": @keyy;
+        }
+        let query = Object.keys(params)
+            .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+            .join('&');
+        var url = 'https://maps.googleapis.com/maps/api/geocode/json?' + query;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                var latA = (data.results[0].geometry.location.lat)
+                var lngA = (data.results[0].geometry.location.lng)
+                latLng = [latA, lngA]
+                console.log(latLng)
+                Master(latLng);
+            })
+            .catch(error => console.error(error))
+    }
+
+    var map;
+    function initMap(coords) {
+
         // Constructor creates a new map - only center and zoom are required.
         map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: latA, lng: lngA },
+            center: { lat: coords[0], lng: coords[1] },
             zoom: 13
         });
-
-        var locationToMark = { lat: latA, lng: lngA };
+        var destination = { lat: coords[0], lng: coords[1] };
         var marker = new google.maps.Marker({
-            position: locationToMark,
+            position: destination,
             map: map,
-            title: 'First Marker!'
+            title: '@address'
         });
-
     }
-
-
-    
 </script>
-
 
 <script async defer
-        src=@API.googleAPICall>
-
-
+        src="src=@googleRequest">
 </script>
+
+
