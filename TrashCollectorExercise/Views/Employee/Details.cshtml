@@ -107,7 +107,7 @@
 
     
     @{
-        string address = Model.streetAddress + " " + Model.city + " " + Model.state + " " + Model.zip;
+        string addressIn = Model.streetAddress + " " + Model.city + " " + Model.state + " " + Model.zip;
 
         API api = new API();
         string googleRequest = api.GoogleAPICall;
@@ -115,7 +115,7 @@
 
     }
 
-    var test3 = [];
+    @*var test3 = [];
     geocode();
 
     function Master(data) {
@@ -129,18 +129,18 @@
 
     var final = "test";
     //geocode();
-    function geocode() {
+    async function geocode() {
         var latLng = [];
         let params = {
-            "address": @address,
-            "key": @keyy;
+            "address": "@addressIn",
+            "key": "@keyy"
         }
         let query = Object.keys(params)
             .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
             .join('&');
         var url = 'https://maps.googleapis.com/maps/api/geocode/json?' + query;
-        fetch(url)
-            .then(response => response.json())
+        await fetch(url)
+            .then(response => await response.json())
             .then(data => {
                 console.log(data)
                 var latA = (data.results[0].geometry.location.lat)
@@ -150,7 +150,7 @@
                 Master(latLng);
             })
             .catch(error => console.error(error))
-    }
+    }*@
 
     var map;
     function initMap(coords) {
@@ -164,13 +164,13 @@
         var marker = new google.maps.Marker({
             position: destination,
             map: map,
-            title: '@address'
+            title: "@addressIn"
         });
     }
 </script>
 
 <script async defer
-        src="src=@googleRequest">
+        src="@googleRequest">
 </script>
 
 
