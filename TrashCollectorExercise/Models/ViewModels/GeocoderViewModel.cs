@@ -10,16 +10,20 @@ namespace TrashCollectorExercise.Models.ViewModels
     public class GeocoderViewModel
     {
         public Customer customer { get; set; }
-        public double lat { get; set; }
-        public double lng { get; set; }
+        public string lat { get; set; }
+        public string lng { get; set; }
+        public string address { get; set; }
 
 
-        public GeocoderViewModel(Customer customerIn)
+        public GeocoderViewModel()
         {
-            customer = customerIn;
+   
+        }
 
-
-
+        public string FormatAddress(Customer customer)
+        {
+            string address = customer.streetAddress + " " + customer.city + " " + customer.state + " " + customer.zip;
+            return address;
         }
 
 

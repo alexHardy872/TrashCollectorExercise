@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using TrashCollectorExercise.Models.ViewModels;
 
 namespace TrashCollectorExercise.Controllers
 {
@@ -36,23 +37,28 @@ namespace TrashCollectorExercise.Controllers
         // GET: Employee/Details/5
         public async Task<ActionResult> Details(int id)
         {
-
             var customer = context.Customers.Where(c => c.Id == id).Single();
-            var longLat =  await GetLongLatFromApi(customer);
-            // get long/ lat
+            
+            GeocoderViewModel code = new GeocoderViewModel();
 
-            // api request
+            string address = code.FormatAddress(customer);
 
-            return View(customer);
+            var latLng = await GetLongLatFromApi(address);
+
+            code.customer = customer;
+            code.lat = latLng[0];
+            code.lng = latLng[1];
+            code.address = address;
+
+            return View(code);
         }
 
-        public async Task<double[]> GetLongLatFromApi(Customer customer)
+        public async Task<string[]> GetLongLatFromApi(string address)
         {
             //sensor=false
             API api = new API();
-            double[] latLng = new double[2];
-            //https://maps.googleapis.com/maps/api/geocode/json?address=11611%20W%20James%20Ave%20Franklin%20WI%2053132&key=AIzaSyCs6XucW-n-pL1f6NFCiJm0VOOuxxiB_E4
-            string address = customer.streetAddress + " " + customer.city + " " + customer.state + " " + customer.zip;
+            string[] latLng = new string[2];
+            
             string requestUri = string.Format("https://maps.googleapis.com/maps/api/geocode/json?address={0}&key={1}", Uri.EscapeDataString(address), api.Key);
 
             var httpClient = new HttpClient();
@@ -66,8 +72,8 @@ namespace TrashCollectorExercise.Controllers
             var results = stuff["results"];
             var geometry = results[0]["geometry"];
             var location = geometry["location"];
-            double lat = Convert.ToDouble(location["lat"]);
-            double lng = Convert.ToDouble(location["lng"]);
+            string lat = Convert.ToString(location["lat"]);
+            string lng = Convert.ToString(location["lng"]);
 
             latLng[0] = lat;
             latLng[1] = lng;
