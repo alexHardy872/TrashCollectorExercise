@@ -110,9 +110,8 @@ namespace TrashCollectorExercise.Controllers
             }
         }
 
-        public ActionResult Pickups()
-        {
-            
+        public async Task<ActionResult> Pickups()
+        {      
             string userId = User.Identity.GetUserId();
             var employee = context.Employees.Where(e => e.ApplicationId == userId).Single();
             var employeeZip = employee.zipCode;
@@ -125,15 +124,29 @@ namespace TrashCollectorExercise.Controllers
 
             var todaysCustomers = customersInZip.Where(c => c.pickupDay == today || c.oneTimePickup == thisDay).ToList();
 
-            // check null start and/or end?
             var todaysAvailableCustomers = todaysCustomers.Where(c => (thisDay < c.startBreak || c.startBreak == null) || (thisDay > c.endBreak || c.endBreak == null)).ToList();
-
             var todayRemaining = todaysAvailableCustomers.Where(c => c.confirmed == false).ToList();
 
- 
-            // then have react to bool confirmed and disappear AND charge customer
+            // make viewbag to get latLongs for wholeLsit
+            // send viewbags to view and loop through 
 
-            return View(todayRemaining);
+            List<GeocoderViewModel> codeViewList = new List<GeocoderViewModel>();
+
+            foreach(Customer cust in todayRemaining)
+            {
+                
+                GeocoderViewModel code = new GeocoderViewModel();
+                string address = code.FormatAddress(cust);
+                var latLng = await GetLongLatFromApi(address);
+                code.customer = cust;
+                code.lat = latLng[0];
+                code.lng = latLng[1];
+                code.address = address;
+                codeViewList.Add(code);
+
+            }
+
+            return View(codeViewList);
         }
         public ActionResult UpdateList(int id)
         {

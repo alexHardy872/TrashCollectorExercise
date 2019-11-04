@@ -27,29 +27,14 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.customer.streetAddress)
+            @Html.DisplayNameFor(model => model.address)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.customer.streetAddress)
+            @Html.DisplayFor(model => model.address)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.customer.city)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.customer.city)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.customer.zip)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.customer.zip)
-        </dd>
-
+        
         <dt>
             @Html.DisplayNameFor(model => model.customer.balance)
         </dt>
@@ -101,7 +86,7 @@
 
 
 
-<div id="map" style="min-height: 200px;"></div>
+<div id="map" style="min-height: 300px; width: 300px;"></div>
     
 
     <script>
@@ -134,7 +119,7 @@
             lat: parseFloat(latA),
             lng: parseFloat(lngA)
         },
-            zoom: 13
+            zoom: 15
         });
         var destination = { lat: parseFloat(latA), lng: parseFloat(lngA)};
         var marker = new google.maps.Marker({

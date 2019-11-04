@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TrashCollectorExercise.Models.Customer>
+﻿@model IEnumerable<TrashCollectorExercise.Models.ViewModels.GeocoderViewModel>
 
 @{
     ViewBag.Title = "Pickups";
@@ -11,34 +11,34 @@
     <tr>
 
         <th>
-            @Html.DisplayNameFor(model => model.confirmed)
+            @Html.DisplayNameFor(model => model.customer.confirmed)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.firstName)
+            @Html.DisplayNameFor(model => model.customer.firstName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.lastName)
+            @Html.DisplayNameFor(model => model.customer.lastName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.streetAddress)
+            @Html.DisplayNameFor(model => model.customer.streetAddress)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.city)
+            @Html.DisplayNameFor(model => model.customer.city)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.zip)
+            @Html.DisplayNameFor(model => model.customer.zip)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.balance)
+            @Html.DisplayNameFor(model => model.customer.balance)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.startBreak)
+            @Html.DisplayNameFor(model => model.customer.startBreak)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.endBreak)
+            @Html.DisplayNameFor(model => model.customer.endBreak)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.oneTimePickup)
+            @Html.DisplayNameFor(model => model.customer.oneTimePickup)
         </th>
         @*<th>
                 @Html.DisplayNameFor(model => model.ApplicationId)
@@ -50,43 +50,43 @@
     {
         <tr>
             <td>
-                @Html.ActionLink("Confirm Pickup", "UpdateList", new { id = item.Id })
+                @Html.ActionLink("Confirm Pickup", "UpdateList", new { id = item.customer.Id })
 
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.firstName)
+                @Html.DisplayFor(modelItem => item.customer.firstName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.lastName)
+                @Html.DisplayFor(modelItem => item.customer.lastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.streetAddress)
+                @Html.DisplayFor(modelItem => item.customer.streetAddress)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.city)
+                @Html.DisplayFor(modelItem => item.customer.city)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.zip)
+                @Html.DisplayFor(modelItem => item.customer.zip)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.balance)
+                @Html.DisplayFor(modelItem => item.customer.balance)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.startBreak)
+                @Html.DisplayFor(modelItem => item.customer.startBreak)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.endBreak)
+                @Html.DisplayFor(modelItem => item.customer.endBreak)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.oneTimePickup)
+                @Html.DisplayFor(modelItem => item.customer.oneTimePickup)
             </td>
             @*<td>
                     @Html.DisplayFor(modelItem => item.ApplicationId)
                 </td>*@
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink("Edit", "Edit", new { id = item.customer.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.customer.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.customer.Id })
             </td>
         </tr>
 
@@ -97,3 +97,61 @@
 <div>
     @Html.ActionLink("UNCONFIRM ALL", "ResetList", "Employee") |
 </div>
+
+<h1> Map of Remaining pickups</h1>
+
+<div id="map" style="min-height: 300px; width: 300px;"></div>
+
+
+<script>
+
+
+        @{
+
+
+        API api = new API();
+        string googleRequest = api.GoogleAPICall;
+        string keyy = api.Key;
+
+    }
+</script>
+<script defer
+        src=@googleRequest type="text/javascript">
+</script>
+<script defer type="text/javascript">
+        let map;
+        let latA = "42.9259039";
+        let lngA = "-88.0599355";
+
+    function initMap() {
+
+        // Constructor creates a new map - only center and zoom are required.
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {
+                lat: parseFloat(latA),
+                lng: parseFloat(lngA)
+            },
+            zoom: 11
+        });
+
+
+
+         @foreach (var item in Model) {
+         <text>
+              var marker = new google.maps.Marker({
+              map: map,
+              position: { lat: parseFloat(@item.lat), lng: parseFloat(@item.lng) },
+              title: '@item.address'
+            });
+        </text>
+             }
+
+
+             console.log(marker);
+             console.log('oy')
+    }
+</script>
+
+
+
+
